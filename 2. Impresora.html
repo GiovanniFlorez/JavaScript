@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Impresora</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .contenedor {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        label, input, button {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <h2>Simulador de Impresora</h2>
+
+    <label for="pagina">Ingresa la cantidad de páginas a imprimir:</label>
+    <input type="number" id="pagina" placeholder="Número de páginas" required>
+    
+    <button onclick="imprimirPaginas()">Imprimir Páginas</button>
+
+    <div class="resultado" id="resultado" style="display: none;">
+        <p id="mensajeResultado"></p>
+        <button onclick="reiniciarImpresora()">Reiniciar Impresora</button>
+    </div>
+</div>
+
+<script>
+    let capacidadPapel = 100; 
+    let totalImpreso = 0;
+
+    function imprimirPaginas() {
+        let paginasAImprimir = parseInt(document.getElementById("pagina").value);
+        let mensaje = '';
+        
+        if (isNaN(paginasAImprimir) || paginasAImprimir <= 0) {
+            alert("Por favor, ingresa un número válido de páginas.");
+            return;
+        }
+
+        while (paginasAImprimir > 0) {
+            if (capacidadPapel >= paginasAImprimir) {
+                capacidadPapel -= paginasAImprimir;
+                totalImpreso += paginasAImprimir;
+                mensaje = `Se han impreso ${paginasAImprimir} páginas.`;
+                break;
+            } else {
+                
+                mensaje = `No hay suficiente papel para imprimir ${paginasAImprimir} páginas. Solo quedan ${capacidadPapel} páginas disponibles.`;
+                paginasAImprimir = 0;
+            }
+        }
+
+        
+        document.getElementById("mensajeResultado").textContent = `${mensaje} Papel restante: ${capacidadPapel}. Total impreso: ${totalImpreso}.`;
+        document.getElementById("resultado").style.display = "block";
+    }
+
+    function reiniciarImpresora() {
+        
+        capacidadPapel = 100;
+        totalImpreso = 0;
+        document.getElementById("resultado").style.display = "none";
+        document.getElementById("pagina").value = '';
+    }
+</script>
+
+</body>
+</html>

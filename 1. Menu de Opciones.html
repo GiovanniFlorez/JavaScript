@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Interactivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .contenedor {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <h2>Menú</h2>
+    <button onclick="mostrarMenu()">Mostrar Menú</button>
+
+    <div class="resultado" id="resultado"></div>
+</div>
+
+<script>
+    function mostrarMenu() {
+        let opcion;
+        do {
+            opcion = prompt("Elige una opción:\n1. Ver productos\n2. Ver precios\n3. Contactar soporte\n4. Salir");
+
+            switch(opcion) {
+                case "4":
+                    mostrarMensaje("¡Gracias por visitar nuestra tienda! ¡Hasta pronto!");
+                    break;
+            }
+        } while (opcion !== "4"); 
+    }
+
+    function mostrarMensaje(mensaje) {
+        const resultDiv = document.getElementById("result");
+        resultDiv.textContent = mensaje;
+        resultDiv.style.display = "block"; 
+    }
+</script>
+
+</body>
+</html>
